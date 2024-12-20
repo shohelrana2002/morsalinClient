@@ -26,6 +26,7 @@ const Register = () => {
       .catch((data) => {
         console.log(data);
         console.log(data);
+        console.log(data);
       });
   };
   return (
