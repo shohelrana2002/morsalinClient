@@ -55,10 +55,10 @@ const Register = () => {
                     pattern: /^[A-Za-z]+$/i,
                   })}
                 />
-                {errors.lastName && (
-                  <span className="text-red-700">Last Name is Required </span>
-                )}
-                {errors.pattern && <span>hi</span>}
+                if(errors.lastName)
+                {<span className="text-red-700">Last Name is Required </span>}
+                else if (errors.pattern){<p>hi</p>}
+                {/* {errors.pattern && <span>hi</span>} */}
               </div>
               {/* Email */}
               <div className="form-control">
