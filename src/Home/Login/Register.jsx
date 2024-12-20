@@ -1,7 +1,19 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 
 const Register = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data.name);
+    const fistName = data.name;
+    const lastName = data.lastName;
+  };
   return (
     <div>
       <div className="hero bg-base-200 min-h-screen">
@@ -12,49 +24,60 @@ const Register = () => {
             </picture>
           </div>
           <div className=" rounded-md bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
-            <form className="card-body">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+              {/* Fist Name  */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Email or Number</span>
+                  <span className="label-text">Name</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Fist Name"
+                  className="input input-bordered"
+                  {...register("name", { required: true })}
+                />
+                {errors.name && (
+                  <span className="text-red-700">Name is Required </span>
+                )}
+              </div>
+              {/* Last Name */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Last Name</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  className="input input-bordered"
+                  {...register("lastName", { required: true })}
+                />
+                {errors.lastName && (
+                  <span className="text-red-700">Last Name is Required </span>
+                )}
+              </div>
+              {/* Email */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Email </span>
                 </label>
                 <input
                   type="email"
-                  placeholder="email or number"
+                  placeholder="Email"
                   className="input input-bordered"
-                  required
+                  {...register("email", { required: true })}
                 />
-              </div>
-
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Password</span>
-                </label>
-                <input
-                  type="password"
-                  placeholder="password"
-                  className="input input-bordered"
-                  required
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Confirm Password</span>
-                </label>
-                <input
-                  type="password"
-                  placeholder="password"
-                  className="input input-bordered"
-                  required
-                />
+                {errors.email && (
+                  <span className="text-red-700">Email is Required </span>
+                )}
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Register</button>
+                <button className="btn btn-primary">Login</button>
               </div>
               <div>
                 <p className="text-black font-medium">
-                  Already Have Account ?{" "}
-                  <Link className="text-red-500" to={"/login"}>
-                    Login
+                  Are You New?
+                  <Link className="text-red-500" to={"/register"}>
+                    Register
                   </Link>
                 </p>
               </div>
