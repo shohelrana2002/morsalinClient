@@ -10,10 +10,13 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data.name);
-    const fistName = data.name;
-    const lastName = data.lastName;
+    const fistName = data?.name;
+    const lastName = data?.lastName;
+    const role = data.role;
     const status = role === "user" ? "approved" : "pending";
+    const email = data?.email;
+    const usersCreateData = { fistName, lastName, status, email };
+    console.log(usersCreateData);
   };
   return (
     <div>
