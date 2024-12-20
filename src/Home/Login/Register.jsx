@@ -1,8 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
+import useGetAuth from "../../Hooks/useGetAuth";
 
 const Register = () => {
+  const { createAccount } = useGetAuth();
   const {
     register,
     handleSubmit,
@@ -17,6 +19,13 @@ const Register = () => {
     const email = data?.email;
     const usersCreateData = { fistName, lastName, status, email };
     console.log(usersCreateData);
+    createAccount(data.email, data.password)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((data) => {
+        console.log(data);
+      });
   };
   return (
     <div>
