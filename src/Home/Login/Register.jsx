@@ -57,8 +57,7 @@ const Register = () => {
                 />
                 if(errors.lastName)
                 {<span className="text-red-700">Last Name is Required </span>}
-                else if (errors.pattern){<p>hi</p>}
-                {/* {errors.pattern && <span>hi</span>} */}
+                if else(errors.pattern){<p>hi</p>}
               </div>
               {/* Email */}
               <div className="form-control">
