@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import useGetAuth from "../../Hooks/useGetAuth";
+import GoogleLogin from "./GoogleLogin";
 
 const Login = () => {
   const { userLogin, userLogout, forgetPassword } = useGetAuth();
@@ -77,6 +78,9 @@ const Login = () => {
                 )}
               </div>
               <Link to={"/forgetPassword"}>Forget Your Password ?</Link>
+              <div>
+                <GoogleLogin></GoogleLogin>
+              </div>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
               </div>

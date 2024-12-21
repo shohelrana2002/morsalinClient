@@ -2,16 +2,19 @@ import React, { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GoogleAuthProvider,
   onAuthStateChanged,
   sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
 import app from "../firebaseAuth/firebaseAuth";
 export const auth = getAuth(app);
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
+  const provider = new GoogleAuthProvider();
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
   // create a New Account
@@ -42,6 +45,11 @@ const AuthProvider = ({ children }) => {
     setLoading(false);
     return sendPasswordResetEmail(auth, email);
   };
+  // google lOgin
+  const googleLogin = () => {
+    setLoading(false);
+    return signInWithPopup(auth, provider);
+  };
   //  Mange User All Time Authentication
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -64,6 +72,7 @@ const AuthProvider = ({ children }) => {
     userLogout,
     emailVerification,
     forgetPassword,
+    googleLogin,
   };
   return (
     <AuthContext.Provider value={authInfos}>{children}</AuthContext.Provider>
