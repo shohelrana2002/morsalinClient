@@ -21,7 +21,8 @@ const Register = () => {
     createAccount(data.email, data.password)
       .then((res) => {
         emailVerification().then(() => {
-          alert("Hi");
+          alert("Check Yor Gmail");
+          userLogout();
         });
       })
       .catch((data) => {

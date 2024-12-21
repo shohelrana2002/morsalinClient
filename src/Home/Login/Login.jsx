@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import useGetAuth from "../../Hooks/useGetAuth";
 
 const Login = () => {
-  const { userLogin } = useGetAuth();
+  const { userLogin, userLogout } = useGetAuth();
   const [errorMessage, setErrorMessage] = useState("");
   const {
     register,
@@ -17,7 +17,12 @@ const Login = () => {
     const usersCreateData = { email };
     userLogin(data?.email, data?.password)
       .then((res) => {
-        console.log(res.user);
+        if (!res?.user?.emailVerified) {
+          userLogout();
+          return alert(
+            "Your email is not verified. Please verify your email to continue."
+          );
+        }
       })
       .catch((error) => {
         if (error.message) {

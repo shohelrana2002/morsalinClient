@@ -70,7 +70,7 @@ const Navbar = () => {
         {user ? (
           <div className="navbar-end gap-2">
             <button className="btn btn-outline btn-primary btn-sm">
-              <NavLink onClick={() => userLogout()} to={""}>
+              <NavLink onClick={() => userLogout()} to={"/login"}>
                 LogOut
               </NavLink>
             </button>

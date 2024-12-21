@@ -28,29 +28,25 @@ const AuthProvider = ({ children }) => {
     setLoading(false);
     return signOut(auth);
   };
-  // email
+  // Send Email Verification
   const emailVerification = () => {
-    const currentLogin = auth.currentUser; // Get the currently authenticated user
-    if (currentLogin) {
+    const currentUser = auth.currentUser; // Get the currently authenticated user
+    if (currentUser) {
       setLoading(true);
-      return sendEmailVerification(currentLogin).finally(() =>
-        setLoading(false)
-      );
-    } else {
-      alert("No user is currently logged in to send verification email.");
-      return Promise.reject("No user is currently logged in.");
+      return sendEmailVerification(currentUser);
+      //     .then(() => {
+      //       alert("Verification email sent. Please check your inbox.");
+      //     })
+      //     .catch((error) => {
+      //       console.error("Failed to send verification email:", error);
+      //     })
+      //     .finally(() => setLoading(false));
+      // } else {
+      //   alert("No user is currently logged in to send a verification email.");
+      //   return Promise.reject("No user is currently logged in.");
     }
   };
 
-  // const emailVerification = (currentUser) => {
-  //   const currentLogin = auth.currentUser;
-  //   if (currentLogin) {
-  //     setLoading(true);
-  //     return emailVerification(currentLogin);
-  //   }
-
-  //   return sendEmailVerification(auth, currentUser);
-  // };
   //  Mange User All Time Authentication
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
