@@ -13,12 +13,12 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   // create a New Account
   const createAccount = (email, password) => {
-    setLoading(true);
+    setLoading(false);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   // login user Authentication
   const userLogin = (email, password) => {
-    setLoading(true);
+    setLoading(false);
     return signInWithEmailAndPassword(auth, email, password);
   };
   //  Mange User All Time Authentication

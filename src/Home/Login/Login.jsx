@@ -1,16 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
+import useGetAuth from "../../Hooks/useGetAuth";
 
 const Login = () => {
+  const { userLogin } = useGetAuth();
+  const [errorMessage, setErrorMessage] = useState("");
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const handleLogin = (data) => {
-    console.log(data.name);
+  const onSubmit = async (data) => {
+    const email = data?.email;
+    const usersCreateData = { email };
+    userLogin(data?.email, data?.password)
+      .then((res) => {
+        console.log(res.user);
+      })
+      .catch((error) => {
+        if (error.message) {
+          setErrorMessage(error?.message || "Password or Account Invalid");
+        } else {
+          setErrorMessage(" ");
+        }
+      });
   };
   return (
     <div>
@@ -22,22 +37,40 @@ const Login = () => {
             </picture>
           </div>
           <div className=" rounded-md bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
-            <form className="card-body">
-              <div onSubmit={onSubmit(handleLogin)} className="form-control">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+              {/* Email */}
+              <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text">Email </span>
                 </label>
                 <input
                   type="email"
-                  placeholder="email"
+                  placeholder="Email"
                   className="input input-bordered"
-                  {...register("name", { required: true })}
+                  {...register("email", { required: true })}
                 />
-                {errors.name && (
-                  <span className="text-red-700">Name is Required </span>
+                {errors.email && (
+                  <span className="text-red-700">Email is Required </span>
                 )}
               </div>
-
+              {/* Password */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Password</span>
+                </label>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  className="input input-bordered"
+                  {...register("password", { required: true, min: 6 })}
+                />
+                {errors.password && (
+                  <span className="text-red-700">password is invalid </span>
+                )}
+                {errorMessage && (
+                  <span className="text-red-700">{errorMessage}</span>
+                )}
+              </div>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
               </div>
