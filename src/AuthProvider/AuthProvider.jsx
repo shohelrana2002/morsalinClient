@@ -1,7 +1,8 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import app from "../firebaseAuth/firebaseAuth";
@@ -20,6 +21,19 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+  //  Mange User All Time Authentication
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      if (currentUser) {
+        console.log(currentUser);
+      }
+    });
+    return () => {
+      return unSubscribe();
+    };
+  }, []);
+
   //  send to context
   const authInfos = {
     user,
