@@ -4,6 +4,7 @@ import {
   getAuth,
   onAuthStateChanged,
   sendEmailVerification,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
@@ -34,19 +35,13 @@ const AuthProvider = ({ children }) => {
     if (currentUser) {
       setLoading(true);
       return sendEmailVerification(currentUser);
-      //     .then(() => {
-      //       alert("Verification email sent. Please check your inbox.");
-      //     })
-      //     .catch((error) => {
-      //       console.error("Failed to send verification email:", error);
-      //     })
-      //     .finally(() => setLoading(false));
-      // } else {
-      //   alert("No user is currently logged in to send a verification email.");
-      //   return Promise.reject("No user is currently logged in.");
     }
   };
-
+  // forget password
+  const forgetPassword = (email) => {
+    setLoading(false);
+    return sendPasswordResetEmail(auth, email);
+  };
   //  Mange User All Time Authentication
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -68,6 +63,7 @@ const AuthProvider = ({ children }) => {
     userLogin,
     userLogout,
     emailVerification,
+    forgetPassword,
   };
   return (
     <AuthContext.Provider value={authInfos}>{children}</AuthContext.Provider>

@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import useGetAuth from "../../Hooks/useGetAuth";
 
 const Login = () => {
-  const { userLogin, userLogout } = useGetAuth();
+  const { userLogin, userLogout, forgetPassword } = useGetAuth();
   const [errorMessage, setErrorMessage] = useState("");
   const {
     register,
@@ -76,6 +76,7 @@ const Login = () => {
                   <span className="text-red-700">{errorMessage}</span>
                 )}
               </div>
+              <Link to={"/forgetPassword"}>Forget Your Password ?</Link>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
               </div>
