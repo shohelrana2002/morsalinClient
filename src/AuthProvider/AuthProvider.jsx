@@ -4,6 +4,7 @@ import {
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import app from "../firebaseAuth/firebaseAuth";
 const auth = getAuth(app);
@@ -20,6 +21,11 @@ const AuthProvider = ({ children }) => {
   const userLogin = (email, password) => {
     setLoading(false);
     return signInWithEmailAndPassword(auth, email, password);
+  };
+  // userSingOut
+  const userLogout = () => {
+    setLoading(false);
+    return signOut(auth);
   };
   //  Mange User All Time Authentication
   useEffect(() => {
@@ -40,6 +46,7 @@ const AuthProvider = ({ children }) => {
     loading,
     createAccount,
     userLogin,
+    userLogout,
   };
   return (
     <AuthContext.Provider value={authInfos}>{children}</AuthContext.Provider>
