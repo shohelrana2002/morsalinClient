@@ -1,9 +1,9 @@
 import React from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import useGetAuth from "../../Hooks/useGetAuth";
 const Register = () => {
-  const { createAccount } = useGetAuth();
+  const { createAccount, userLogout, emailVerification } = useGetAuth();
   const {
     register,
     handleSubmit,
@@ -20,7 +20,9 @@ const Register = () => {
     console.log(usersCreateData);
     createAccount(data.email, data.password)
       .then((res) => {
-        console.log(res.data);
+        emailVerification().then(() => {
+          alert("Hi");
+        });
       })
       .catch((data) => {
         console.log(data.data);
@@ -139,13 +141,13 @@ const Register = () => {
                 {errors.role && <p>Select On</p>}
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
+                <button className="btn btn-primary">Register</button>
               </div>
               <div>
                 <p className="text-black font-medium">
-                  Are You New?
-                  <Link className="text-red-500" to={"/register"}>
-                    Register
+                  All Ready Have Account?
+                  <Link className="text-red-500" to={"/login"}>
+                    Login
                   </Link>
                 </p>
               </div>
