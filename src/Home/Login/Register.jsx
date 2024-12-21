@@ -1,8 +1,7 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { Link } from "react-router";
 import useGetAuth from "../../Hooks/useGetAuth";
-
 const Register = () => {
   const { createAccount } = useGetAuth();
   const {
@@ -24,10 +23,7 @@ const Register = () => {
         console.log(res.data);
       })
       .catch((data) => {
-        console.log(data);
-        console.log(data);
-        console.log(data);
-        console.log(data);
+        console.log(data.data);
       });
   };
   return (
