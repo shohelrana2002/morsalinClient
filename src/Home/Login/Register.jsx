@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import useGetAuth from "../../Hooks/useGetAuth";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Register = () => {
   const { createAccount, userLogout, emailVerification } = useGetAuth();
   const {
@@ -21,12 +23,30 @@ const Register = () => {
     createAccount(data.email, data.password)
       .then((res) => {
         emailVerification().then(() => {
-          alert("Check Yor Gmail");
+          toast.success(
+            "Your account created successfully.Plz  verified Your Email.",
+            {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            }
+          );
           userLogout();
         });
+        return;
       })
-      .catch((data) => {
-        console.log(data.data);
+      .catch(() => {
+        toast.error("Your Gmail Already Use ", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
       });
   };
   return (
@@ -143,6 +163,7 @@ const Register = () => {
               </div>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Register</button>
+                <ToastContainer></ToastContainer>
               </div>
               <div>
                 <p className="text-black font-medium">
