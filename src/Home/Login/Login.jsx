@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import useGetAuth from "../../Hooks/useGetAuth";
 import GoogleLogin from "./GoogleLogin";
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const { userLogin, userLogout, forgetPassword } = useGetAuth();
   const [errorMessage, setErrorMessage] = useState("");
@@ -16,14 +17,27 @@ const Login = () => {
   const onSubmit = async (data) => {
     const email = data?.email;
     const usersCreateData = { email };
-    userLogin(data?.email, data?.password)
+    await userLogin(data?.email, data?.password)
       .then((res) => {
         if (!res?.user?.emailVerified) {
           userLogout();
-          return alert(
-            "Your email is not verified. Please verify your email to continue."
+          toast.error(
+            "Your email is not verified. Please verify your email to continue.",
+            {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            }
           );
+          return;
         }
+        toast.success("Login successful!", {
+          position: "top-right",
+          autoClose: 3000,
+        });
       })
       .catch((error) => {
         if (error.message) {
