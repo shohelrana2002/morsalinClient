@@ -10,11 +10,6 @@ const Loader = () => {
         width="100"
         color="#4fa94d"
         ariaLabel="line-wave-loading"
-        wrapperStyle={{}}
-        wrapperClass=""
-        firstLineColor=""
-        middleLineColor=""
-        lastLineColor=""
       />
     </div>
   );

@@ -9,11 +9,13 @@ import Register from "../Home/Login/Register";
 import ForgetPassword from "../Home/Login/ForgetPassword";
 import UserProfile from "../Home/Profile/UserProfile";
 import PrivateRoute from "./PrivateRoutes/PrivateRoute";
+import Error from "../Pages/Error";
 
 export const route = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
@@ -43,7 +45,7 @@ export const route = createBrowserRouter([
         path: "/profile",
         element: (
           <PrivateRoute>
-            <UserProfile></UserProfile>{" "}
+            <UserProfile></UserProfile>
           </PrivateRoute>
         ),
       },

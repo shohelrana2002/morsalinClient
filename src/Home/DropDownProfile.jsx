@@ -24,16 +24,21 @@ const DropDownProfile = () => {
           className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
         >
           <li>
-            <button className="btn btn-outline btn-primary btn-sm">
-              <Link to={"/profile"}>Profile </Link>
-            </button>
+            <Link
+              className="btn btn-outline btn-primary btn-sm"
+              to={"/profile"}
+            >
+              <button>Profile</button>
+            </Link>
           </li>
           <li>
-            <button className="btn btn-outline btn-primary btn-sm">
-              <NavLink onClick={() => userLogout()} to={"/login"}>
-                LogOut
-              </NavLink>
-            </button>
+            <NavLink
+              className="btn btn-outline btn-primary btn-sm"
+              onClick={() => userLogout()}
+              to={"/login"}
+            >
+              <button>LogOut</button>
+            </NavLink>
           </li>
         </ul>
       </div>

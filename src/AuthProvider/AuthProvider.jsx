@@ -15,21 +15,21 @@ export const auth = getAuth(app);
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const provider = new GoogleAuthProvider();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   // create a New Account
   const createAccount = (email, password) => {
-    setLoading(false);
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   // login user Authentication
   const userLogin = (email, password) => {
-    setLoading(false);
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
   // userSingOut
   const userLogout = () => {
-    setLoading(false);
+    setLoading(true);
     return signOut(auth);
   };
   // Send Email Verification
@@ -42,12 +42,12 @@ const AuthProvider = ({ children }) => {
   };
   // forget password
   const forgetPassword = (email) => {
-    setLoading(false);
+    setLoading(true);
     return sendPasswordResetEmail(auth, email);
   };
   // google lOgin
   const googleLogin = () => {
-    setLoading(false);
+    setLoading(true);
     return signInWithPopup(auth, provider);
   };
   //  Mange User All Time Authentication
@@ -55,6 +55,7 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
+        setLoading(false);
         console.log(currentUser);
       }
     });
