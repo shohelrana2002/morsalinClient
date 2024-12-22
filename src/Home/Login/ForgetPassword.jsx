@@ -1,37 +1,32 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useGetAuth from "../../Hooks/useGetAuth";
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Swal from "sweetalert2";
+import { toast, ToastContainer } from "react-toastify";
 const ForgetPassword = () => {
   const { forgetPassword } = useGetAuth();
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
     console.log(data.email);
     forgetPassword(data?.email)
       .then(() => {
-        Swal.fire({
-          position: "top",
-          width: "400px",
-          icon: "success",
-          title: "Check your Gmail",
-          showConfirmButton: false,
-          timer: 1500,
+        toast.success("Send Your Code Gmail", {
+          position: "top-right",
+          autoClose: 3000,
         });
       })
       .catch((err) => {
-        Swal.fire({
-          position: "top-end",
-          icon: "error",
-          title: "Invalid Yor Gmail or Account",
-          showConfirmButton: false,
-          timer: 1500,
+        toast.error(`${err.message}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
         });
       });
   };
@@ -72,6 +67,7 @@ const ForgetPassword = () => {
             >
               Send Password Reset Email
             </button>
+            <ToastContainer></ToastContainer>
           </form>
         </div>
       </div>

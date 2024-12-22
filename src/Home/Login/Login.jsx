@@ -58,6 +58,7 @@ const Login = () => {
           </div>
           <div className=" rounded-md bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+              <ToastContainer></ToastContainer>
               {/* Email */}
               <div className="form-control">
                 <label className="label">
