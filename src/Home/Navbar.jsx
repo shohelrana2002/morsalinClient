@@ -1,9 +1,10 @@
 import React from "react";
-import { NavLink } from "react-router";
 import useGetAuth from "../Hooks/useGetAuth";
+import { NavLink } from "react-router";
+import DropDownProfile from "./DropDownProfile";
 
 const Navbar = () => {
-  const { user, userLogout } = useGetAuth();
+  const { user } = useGetAuth();
   return (
     <div>
       <div className="navbar bg-base-300 z-30 fixed h-16">
@@ -69,11 +70,8 @@ const Navbar = () => {
         </div>
         {user ? (
           <div className="navbar-end gap-2">
-            <button className="btn btn-outline btn-primary btn-sm">
-              <NavLink onClick={() => userLogout()} to={"/login"}>
-                LogOut
-              </NavLink>
-            </button>
+            <p>{user?.displayName}</p>
+            <DropDownProfile></DropDownProfile>
           </div>
         ) : (
           <div className="navbar-end gap-2">

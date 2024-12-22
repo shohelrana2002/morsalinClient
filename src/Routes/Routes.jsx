@@ -7,6 +7,8 @@ import Contact from "../Pages/Contact";
 import Login from "../Home/Login/Login";
 import Register from "../Home/Login/Register";
 import ForgetPassword from "../Home/Login/ForgetPassword";
+import UserProfile from "../Home/Profile/UserProfile";
+import PrivateRoute from "./PrivateRoutes/PrivateRoute";
 
 export const route = createBrowserRouter([
   {
@@ -36,6 +38,14 @@ export const route = createBrowserRouter([
       {
         path: "/forgetPassword",
         element: <ForgetPassword></ForgetPassword>,
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <UserProfile></UserProfile>{" "}
+          </PrivateRoute>
+        ),
       },
     ],
   },

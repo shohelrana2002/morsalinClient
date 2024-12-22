@@ -37,11 +37,15 @@ const GoogleLogin = () => {
       });
   };
   return (
-    <div className="">
-      <p className="cursor-pointer" onClick={handleGoogleLogin}>
-        <ToastContainer />
-        <IoLogoGoogle className="text-center w-full text-green-700 text-2xl"></IoLogoGoogle>
-      </p>
+    <div>
+      <ToastContainer />
+      <button
+        onClick={handleGoogleLogin}
+        className="btn-outline btn-primary btn text-center w-full flex items-center gap-x-1 justify-center text-green-700 text-2xl"
+      >
+        Google
+        <IoLogoGoogle></IoLogoGoogle>
+      </button>
     </div>
   );
 };

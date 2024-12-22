@@ -21,7 +21,7 @@ const Register = () => {
     const usersCreateData = { fistName, lastName, status, email };
     console.log(usersCreateData);
     createAccount(data.email, data.password)
-      .then((res) => {
+      .then(() => {
         emailVerification().then(() => {
           toast.success(
             "Your account created successfully.Plz  verified Your Email.",

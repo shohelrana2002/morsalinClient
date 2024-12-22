@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useGetAuth from "../../Hooks/useGetAuth";
 import GoogleLogin from "./GoogleLogin";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
+  const navigate = useNavigate();
   const { userLogin, userLogout, forgetPassword } = useGetAuth();
   const [errorMessage, setErrorMessage] = useState("");
   const {
@@ -34,10 +35,15 @@ const Login = () => {
           );
           return;
         }
-        toast.success("Login successful!", {
+        toast.success("Login Successfully", {
           position: "top-right",
-          autoClose: 3000,
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
         });
+        navigate("/");
       })
       .catch((error) => {
         if (error.message) {
@@ -58,7 +64,6 @@ const Login = () => {
           </div>
           <div className=" rounded-md bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-              <ToastContainer></ToastContainer>
               {/* Email */}
               <div className="form-control">
                 <label className="label">
